@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Join {{title}} on Slack!</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<link rel="shortcut icon" href="https://slack.global.ssl.fastly.net/272a/img/icons/favicon-32.png">
+<link href="style.css" media="all" rel="stylesheet" />
+
+<style>
+.logo.org{background-image:url({{logo}});margin-right:7rem}
+
+</style>
+
+</head>
+<body>
+<div class="splash">
+<div class="logos">
+<div class="logo org"></div>
+<div class="logo slack"></div>
+</div>
+<p>Join <b>{{title}}</b> on Slack.</p>
+<p class="status">
+<b class="active">{{active}}</b> users online now of <b class="total">{{total}}</b> registered.
+</p>
+<form id="invite">
+<input type="email" name="email" placeholder="you@yourdomain.com" autofocus=true class="form-item">
+<button class="loading">Get my Invite</button>
+</form>
+<p class="signin">or <a href="https://{{slackname}}.slack.com" target="_top">sign in</a>.</p>
+
+<footer>powered by SwiftSlack, a Swift version of <a href="http://rauchg.com/slackin" target="_blank">slackin</a></footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script>
+var request = $.ajax({
+	url: "/api/v1/stats",
+	method: "GET",
+	dataType: "json"
+});
+
+request.done(function( d ) {
+//console.log(d);
+$("#active").text(d.active);
+$("#total").text(d.total);
+});
+
+</script>
+</div>
+</body>
+</html>
