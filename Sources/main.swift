@@ -24,12 +24,14 @@ import PerfectRequestLogger
 
 // Settings path vars.
 #if os(Linux)
-let fileRoot = "/perfect-deployed/perfect-logserver/"
+	let	FileRoot = "/perfect-deployed/perfect-logserver/"
+	let port = 8103
 #else
-let FileRoot = ""
+	let FileRoot = ""
+	let port = 8181
 #endif
 
-let (apiToken, slackName, port) = getSettings()
+let (apiToken, slackName) = getSettings()
 
 let slackObj = SlackAPI()
 // get team info / logo
@@ -46,7 +48,7 @@ var confData: [String:[[String:Any]]] = [
 	"servers": [
 		[
 			"name":"localhost",
-			"port":8181,
+			"port":port,
 			"routes":[],
 			"filters":[
 				[
