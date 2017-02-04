@@ -76,6 +76,7 @@ var routes: [[String: Any]] = [[String: Any]]()
 routes.append(["method":"get", "uri":"/", "handler":Handlers.main])
 routes.append(["method":"post", "uri":"/invite", "handler":Handlers.invite])
 routes.append(["method":"get", "uri":"/api/v1/stats", "handler":Handlers.members])
+routes.append(["method":"get", "uri":"/badge.svg", "handler":Handlers.badge])
 
 routes.append(["method":"get", "uri":"/**", "handler":PerfectHTTPServer.HTTPHandler.staticFiles,
                "documentRoot":"./webroot",
