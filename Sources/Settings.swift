@@ -10,19 +10,15 @@ import JSONConfig
 
 // Function to read the JSON config file (ApplicationConfiguration.json) and set the apiToken
 func getSettings() -> (String,String) {
+	var apiToken = ""
+	var slackName = ""
+
 	if let config = JSONConfig(name: "\(FileRoot)ApplicationConfiguration.json") {
-		guard let dict = config.getValues(), let apiToken = dict["token"] else {
-			print("Unable to get API Token")
-			return ("","")
-		}
-		guard let slackName = dict["name"] else {
-			print("Unable to get Slack Name")
-			return ("","")
-		}
-		return (apiToken as! String,slackName as! String)
-	} else {
-		print("Unable to get Configuration")
+		let dict	= config.getValues()!
+		apiToken	= dict["token"] as! String
+		slackName	= dict["name"] as! String
 	}
-	return ("","") // defaults
+	return (apiToken, slackName)
+
 }
 

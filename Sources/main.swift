@@ -24,7 +24,7 @@ import PerfectRequestLogger
 
 // Settings path vars.
 #if os(Linux)
-	let	FileRoot = "/perfect-deployed/perfect-logserver/"
+	let	FileRoot = "/perfect-deployed/swiftslack/"
 	let port = 8103
 #else
 	let FileRoot = ""
