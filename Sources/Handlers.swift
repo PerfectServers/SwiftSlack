@@ -45,7 +45,9 @@ class Handlers {
 					if returned["ok"] as! Bool {
 						try response.setBody(json: ["msg": "Success!"])
 					} else {
-						try response.setBody(json: ["msg": returned["error"] as! String])
+						var str = returned["error"] as! String
+						str = str.replacingOccurrences(of: "_", with: " ")
+						try response.setBody(json: ["msg": "Error: \(str)"])
 					}
 				} else {
 					try response.setBody(json: ["msg":"Please supply a valid email"])

@@ -21,9 +21,9 @@
 <p class="status">
 <b class="active">{{active}}</b> users online now of <b class="total">{{total}}</b> registered.
 </p>
-<form id="invite">
-<input type="email" name="email" placeholder="you@yourdomain.com" autofocus=true class="form-item">
-<button class="loading">Get my Invite</button>
+<form id="invite" method="POST">
+<input id="ee" type="email" name="email" placeholder="you@yourdomain.com" autofocus=true class="form-item">
+<div id="trigger" class="loading">Get my Invite</div>
 </form>
 <p class="signin">or <a href="https://{{slackname}}.slack.com" target="_top">sign in</a>.</p>
 
@@ -32,6 +32,22 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script>
+$("#trigger").click(function(){
+	var body = {}
+	body.email = $("#ee").val();
+	var request = $.ajax({
+		url: "/invite",
+		method: "POST",
+		dataType: "json",
+		data: JSON.stringify(body)
+	});
+
+	request.done(function( d ) {
+		$("#trigger").text(d.msg);
+	});
+	return false;
+});
+
 var request = $.ajax({
 	url: "/api/v1/stats",
 	method: "GET",
@@ -39,9 +55,9 @@ var request = $.ajax({
 });
 
 request.done(function( d ) {
-//console.log(d);
-$("#active").text(d.active);
-$("#total").text(d.total);
+	//console.log(d);
+	$("#active").text(d.active);
+	$("#total").text(d.total);
 });
 
 </script>
